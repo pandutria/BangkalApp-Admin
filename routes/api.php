@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\HistoryController;
+use App\Models\Announcement;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +32,14 @@ Route::post('/news', [NewsController::class, 'store']);
 Route::put('/news/{id}', [NewsController::class, 'update']);
 Route::delete('/news/{id}', [NewsController::class, 'destroy']);
 
+Route::get('/announcement', [AnnouncementController::class, 'index']);
+Route::get('/announcement/{id}', [AnnouncementController::class, 'show']);
+Route::post('/announcement', [AnnouncementController::class, 'store']);
+Route::put('/announcement/{id}', [AnnouncementController::class, 'update']);
+Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy']);
 
+Route::get('/history', [HistoryController::class, 'index']);
+Route::get('/history/{id}', [HistoryController::class, 'show']);
+Route::post('/history', [HistoryController::class, 'store']);
+Route::put('/history/{id}', [HistoryController::class, 'update']);
+Route::delete('/history/{id}', [HistoryController::class, 'destroy']);

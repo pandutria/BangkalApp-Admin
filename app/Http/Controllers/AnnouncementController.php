@@ -12,7 +12,7 @@ class AnnouncementController extends Controller
 
         if ($request->has('search')) {
             $search = $request->input('search');
-            $query->where('name', "Like", '%'. $search . '%');
+            $query->where('title', 'LIKE', '%'. $search . '%');
         }
 
         return $query->get();
