@@ -59,11 +59,12 @@ class NewsController extends Controller
 
     public function destroy($id) {
         $news = News::find($id);
-        $news->delete();
 
         if (!$news) {
             return response()->json(['message' => 'News not found'], 404);
         }
+
+        $news->delete();
 
         return response()->json([
             'message' => 'News deleted successfully'
