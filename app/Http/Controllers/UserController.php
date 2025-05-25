@@ -12,13 +12,13 @@ class UserController extends Controller
 {
     public function register(Request $request) {
         try {
-            $request->validate([
-                'role' => 'required|string',
-                'fullname' => 'required|string',
-                'username' => 'required|string|unique:users',
-                'password' => 'required|string',
-                'image_url' => 'string'
-            ]);
+            // $request->validate([
+            //     'role' => 'required|string',
+            //     'fullname' => 'required|string',
+            //     'username' => 'required|string|unique:users',
+            //     'password' => 'required|string',
+            //     'image_url' => 'string'
+            // ]);
 
             $user = new User();
             $user->role = $request->role;
@@ -29,7 +29,7 @@ class UserController extends Controller
             $user->save();
 
             // $token = $user->createToken('access_token')->plainTextToken;
-            
+
             return response()->json([
                 'user' => $user,
                 // 'token' => $token,
