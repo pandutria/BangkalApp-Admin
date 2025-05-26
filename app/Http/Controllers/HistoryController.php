@@ -29,7 +29,7 @@ class HistoryController extends Controller
             $history = new History();
             $history->title = $request->title;
             $history->text = $request->text;
-            $history->image_url = $request->title;
+            $history->image_url = $request->image_url;
             $history->date = $request->date;
             $history->save();
 

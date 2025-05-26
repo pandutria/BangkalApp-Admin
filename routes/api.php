@@ -6,8 +6,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\HistoryController;
-use App\Models\Announcement;
-
+use App\Http\Controllers\PotentialController;
+use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\VillageOfficialsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,7 +19,6 @@ use App\Models\Announcement;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 
@@ -43,3 +43,22 @@ Route::get('/history/{id}', [HistoryController::class, 'show']);
 Route::post('/history', [HistoryController::class, 'store']);
 Route::put('/history/{id}', [HistoryController::class, 'update']);
 Route::delete('/history/{id}', [HistoryController::class, 'destroy']);
+
+Route::get('/potential', [PotentialController::class, 'index']);
+Route::get('/potential/{id}', [PotentialController::class, 'show']);
+Route::post('/potential', [PotentialController::class, 'store']);
+Route::put('/potential/{id}', [PotentialController::class, 'update']);
+Route::delete('/potential/{id}', [PotentialController::class, 'destroy']);
+
+Route::get('/organization', [OrganizationController::class, 'index']);
+Route::get('/organization/{id}', [OrganizationController::class, 'show']);
+Route::post('/organization', [OrganizationController::class, 'store']);
+Route::put('/organization/{id}', [OrganizationController::class, 'update']);
+Route::delete('/organization/{id}', [OrganizationController::class, 'destroy']);
+
+Route::get('/village', [VillageOfficialsController::class, 'index']);
+Route::get('/village/{id}', [VillageOfficialsController::class, 'show']);
+Route::post('/village', [VillageOfficialsController::class, 'store']);
+Route::put('/village/{id}', [VillageOfficialsController::class, 'update']);
+Route::delete('/village/{id}', [VillageOfficialsController::class, 'destroy']);
+

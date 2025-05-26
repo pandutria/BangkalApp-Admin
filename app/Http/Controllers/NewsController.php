@@ -38,7 +38,7 @@ class NewsController extends Controller
             ], 201);
         } catch(\Exception $e) {
             return response()->json([
-                'eror' => $e->getMessage()
+                'error' => $e->getMessage()
             ], 500);
         }
     }
