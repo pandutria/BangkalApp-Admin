@@ -77,6 +77,14 @@
             const inputPassword = document.getElementById('inputPassword').value;
 
             async function HandleSubmit() {
+                if (!inputName || !inputPassword) {
+                    Swal.fire({
+                        title: 'Nama Pengguna / Kata Sandi Harus Diisi',
+                        icon: 'error'
+                    });
+                    return;
+                }
+
                 try {
                     const response = await axios.post('/api/login', {
                         username: inputName,
@@ -99,10 +107,9 @@
                     }, 3000);
                 } catch (error) {
                     Swal.fire({
-                        title: 'Nama Pengguna/Password Salah!',
+                        title: 'Nama Pengguna/Kata Sandi Salah!',
                         icon: 'error'
                     });
-                    console.error(error)
                 }
             }
 
