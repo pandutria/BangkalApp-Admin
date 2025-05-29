@@ -1,0 +1,103 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle with Gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="houseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="leafGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16a34a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#bgGradient)" stroke="#ffffff" stroke-width="3"/>
+  
+  <!-- Village House Icon -->
+  <g transform="translate(100, 85)">
+    <!-- House Base -->
+    <rect x="-20" y="-5" width="40" height="25" fill="url(#houseGradient)" rx="2"/>
+    <!-- House Roof -->
+    <polygon points="-25,-5 0,-25 25,-5" fill="#dc2626"/>
+    <!-- Door -->
+    <rect x="-5" y="5" width="10" height="15" fill="#7c2d12" rx="1"/>
+    <!-- Windows -->
+    <rect x="-15" y="-2" width="6" height="6" fill="#93c5fd" rx="1"/>
+    <rect x="9" y="-2" width="6" height="6" fill="#93c5fd" rx="1"/>
+    <!-- Door Handle -->
+    <circle cx="2" cy="12" r="1" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Digital/Tech Elements -->
+  <!-- WiFi Signal Lines -->
+  <g transform="translate(65, 60)">
+    <path d="M 0,0 Q 5,-5 10,0" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8"/>
+    <path d="M -3,3 Q 5,-8 13,3" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M -6,6 Q 5,-11 16,6" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.4"/>
+  </g>
+  
+  <!-- Mobile Phone Icon -->
+  <g transform="translate(135, 65)">
+    <rect x="0" y="0" width="12" height="20" fill="#ffffff" rx="2" stroke="#cbd5e1" stroke-width="1"/>
+    <rect x="1" y="2" width="10" height="14" fill="#3b82f6" rx="1"/>
+    <circle cx="6" cy="18" r="1" fill="#64748b"/>
+    <!-- Screen content lines -->
+    <line x1="2" y1="4" x2="10" y2="4" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="2" y1="6" x2="8" y2="6" stroke="#ffffff" stroke-width="0.5"/>
+    <line x1="2" y1="8" x2="10" y2="8" stroke="#ffffff" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Decorative Leaves -->
+  <g transform="translate(70, 130)">
+    <ellipse cx="0" cy="0" rx="8" ry="4" fill="url(#leafGradient)" transform="rotate(-20)"/>
+    <ellipse cx="0" cy="0" rx="6" ry="3" fill="#dcfce7" transform="rotate(-20)"/>
+  </g>
+  
+  <g transform="translate(130, 125)">
+    <ellipse cx="0" cy="0" rx="8" ry="4" fill="url(#leafGradient)" transform="rotate(20)"/>
+    <ellipse cx="0" cy="0" rx="6" ry="3" fill="#dcfce7" transform="rotate(20)"/>
+  </g>
+  
+  <!-- Connection Lines -->
+  <g opacity="0.3">
+    <line x1="85" y1="85" x2="115" y2="85" stroke="#ffffff" stroke-width="1" stroke-dasharray="2,2"/>
+    <line x1="100" y1="70" x2="100" y2="100" stroke="#ffffff" stroke-width="1" stroke-dasharray="2,2"/>
+  </g>
+  
+  <!-- Text Elements -->
+  <text x="100" y="145" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">DESA BANGKAL</text>
+  <text x="100" y="160" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="8" opacity="0.9">PELAYANAN DIGITAL</text>
+  
+  <!-- Service Icons Around -->
+  <!-- Document Icon -->
+  <g transform="translate(45, 100)">
+    <rect x="0" y="0" width="8" height="10" fill="#ffffff" rx="1"/>
+    <line x1="1" y1="2" x2="7" y2="2" stroke="#2563eb" stroke-width="0.5"/>
+    <line x1="1" y1="4" x2="6" y2="4" stroke="#2563eb" stroke-width="0.5"/>
+    <line x1="1" y1="6" x2="7" y2="6" stroke="#2563eb" stroke-width="0.5"/>
+  </g>
+  
+  <!-- People Icon -->
+  <g transform="translate(147, 100)">
+    <circle cx="2" cy="2" r="1.5" fill="#ffffff"/>
+    <circle cx="6" cy="2" r="1.5" fill="#ffffff"/>
+    <path d="M 0,6 Q 2,4 4,6 Q 6,4 8,6" stroke="#ffffff" stroke-width="1" fill="none"/>
+  </g>
+  
+  <!-- Gear Icon -->
+  <g transform="translate(100, 40)">
+    <circle cx="0" cy="0" r="4" fill="none" stroke="#ffffff" stroke-width="1"/>
+    <circle cx="0" cy="0" r="2" fill="#ffffff"/>
+    <g stroke="#ffffff" stroke-width="1">
+      <line x1="0" y1="-6" x2="0" y2="-5"/>
+      <line x1="0" y1="5" x2="0" y2="6"/>
+      <line x1="-6" y1="0" x2="-5" y2="0"/>
+      <line x1="5" y1="0" x2="6" y2="0"/>
+    </g>
+  </g>
+</svg>
