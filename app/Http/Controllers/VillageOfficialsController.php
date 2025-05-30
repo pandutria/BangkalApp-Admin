@@ -16,10 +16,6 @@ class VillageOfficialsController extends Controller
             $query->where('title', 'LIKE', '%'. $search .'%');
         }
 
-        $query->join('organizations', 'village_officials.organization_id', '=', 'organizations.id')
-         ->orderBy('organizations.level', 'asc')
-         ->select('village_officials.*'); // pastikan hanya ambil kolom dari village_officials
-
          return $query->with('organization')->get();
     }
 

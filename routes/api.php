@@ -9,6 +9,8 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PotentialController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\VillageOfficialsController;
+use App\Http\Controllers\LetterTypeController;
+use App\Http\Controllers\LetterRequestController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +26,9 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [UserController::class, 'me']);
+    Route::post('/logout', [UserController::class, 'logout']);
+
+    Route::post('/letterRequest', [LetterRequestController::class, 'store']);
 });
 
 Route::get('/news', [NewsController::class, 'index']);
@@ -61,4 +66,18 @@ Route::get('/village/{id}', [VillageOfficialsController::class, 'show']);
 Route::post('/village', [VillageOfficialsController::class, 'store']);
 Route::put('/village/{id}', [VillageOfficialsController::class, 'update']);
 Route::delete('/village/{id}', [VillageOfficialsController::class, 'destroy']);
+
+Route::get('/letterType', [LetterTypeController::class, 'index']);
+Route::get('/letterType/{id}', [LetterTypeController::class, 'show']);
+Route::post('/letterType', [LetterTypeController::class, 'store']);
+Route::put('/letterType/{id}', [LetterTypeController::class, 'update']);
+Route::delete('/letterType/{id}', [LetterTypeController::class, 'destroy']);
+
+Route::get('/letterRequest', [LetterRequestController::class, 'index']);
+Route::get('/letterRequest/{id}', [LetterRequestController::class, 'show']);
+Route::put('/letterRequest/approved/{id}', [LetterRequestController::class, 'approved']);
+Route::put('/letterRequest/rejected/{id}', [LetterRequestController::class, 'rejected']);
+Route::get('/letterRequest/byLetterType', [LetterRequestController::class, 'showByLetterType']);
+// Route::put('/letterRequest/{id}', [LetterRequestController::class, 'update']);
+Route::delete('/letterRequest/{id}', [LetterRequestController::class, 'destroy']);
 

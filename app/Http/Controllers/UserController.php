@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
 {
@@ -56,6 +57,15 @@ class UserController extends Controller
             'user' => $user,
             'token' => $token
         ], 201);
+    }
+
+    public function logout(Request $request) {
+        $token = PersonalAccessToken::findToken($request->bearerToken());
+        $token->delete();
+
+        return response()->json([
+            'message' => 'Keluar Berhasil'
+        ], 200);
     }
 
     public function me() {

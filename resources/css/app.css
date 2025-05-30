@@ -1,0 +1,54 @@
+/* Color pallate */
+* {
+    font-family: 'poppins';
+}
+
+.bodyPrimary {
+    background-color: #4B70F5;
+}
+
+.bodySecondary {
+    background-color: #4C3BCF;
+}
+
+.bodyGray {
+    background-color: #464646;
+}
+
+.bodyLightGray {
+    background-color: #898989;
+}
+
+#dashboardHome img {
+    width: 260px;
+    margin-bottom: 14px;
+}
+
+#dashboardHome h3 {
+    font-weight: 500;
+    text-align: center;
+    color: black;
+    margin: 10px 0;
+    font-size: 28px;
+}
+
+#dashboardHome span {
+    color: #4B70F5;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    #dashboardHome img {
+        width: 140px;
+    }
+
+    #dashboardHome h3 {
+        font-size: 16px;
+        margin: 4px 0;
+    }
+
+    #dashboardHome span {
+        font-size: 14px;
+    }
+}
