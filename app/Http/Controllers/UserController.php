@@ -64,7 +64,7 @@ class UserController extends Controller
         $token->delete();
 
         return response()->json([
-            'message' => 'Keluar Berhasil'
+            'message' => 'Logout successfully'
         ], 200);
     }
 
