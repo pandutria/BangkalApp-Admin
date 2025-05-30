@@ -1,8 +1,8 @@
-<div class="modal fade" id="modalTambahOrganisasi" tabindex="-1" aria-labelledby="modalTambahOrganisasiLabel" aria-hidden="true">
+<div class="modal fade" id="modalTambahKategoriSurat" tabindex="-1" aria-labelledby="modalTambahKategoriSuratLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalTambahOrganisasiLabel">Tambah Organisasi</h5>
+                <h5 class="modal-title" id="modalTambahKategoriSuratLabel">Tambah Kategori Surat</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <form id="formBerita">
                     <div class="mb-3">
-                        <label for="nama" class="form-label">Nama Organisasi</label>
+                        <label for="nama" class="form-label">Nama Kategori</label>
                         <input type="text" class="form-control" id="nama" name="nama" required>
                     </div>
                     <div class="mb-3">
@@ -20,16 +20,6 @@
                     <div class="mb-3 d-flex flex-column">
                         <label for="gambar" class="form-label">Gambar</label>
                         <input type="file" id="gambar" name="gambar" accept="image/*">
-                    </div>
-                    <div class="mb-3">
-                        <label for="level" class="form-label">Kelas</label>
-                        <select class="form-select" id="level" name="level" required>
-                            <option value="" disabled selected>Pilih Kelas</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
                     </div>
                 </form>
             </div>
@@ -50,12 +40,11 @@
         const nama = document.getElementById('nama').value;
         const deskripsi = document.getElementById('deskripsi').value;
         const gambar = document.getElementById('gambar').files[0];
-        const level = document.getElementById('level').value;
 
         const formData = new FormData();
         formData.append('file', gambar);
         formData.append('upload_preset', 'bangkal-app');
-        formData.append('folder', 'bangkal-app/organization');
+        formData.append('folder', 'bangkal-app/letter-types');
 
         async function handleSubmit() {
             try {
@@ -66,11 +55,10 @@
 
                 const imageUrl = uploadResponse.data.secure_url;
 
-                await axios.post('/api/organization', {
-                    title: nama,
+                await axios.post('/api/letterType', {
+                    name: nama,
                     description: deskripsi,
                     image_url: imageUrl,
-                    level: level,
                 });
 
                 Swal.fire({

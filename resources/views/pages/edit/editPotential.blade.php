@@ -45,11 +45,12 @@
         const formData = new FormData();
         formData.append('file', gambar);
         formData.append('upload_preset', 'Bangkal-app');
+        formData.append('folder', 'bangkal-app/potential');
 
         async function handleEdit() {
             try {
                 const uploadResponse = await axios.post(
-                    'https://api.cloudinary.com/v1_1/dlnhrdqkh/image/upload',
+                    'https://api.cloudinary.com/v1_1/dxbafxnb5/image/upload',
                     formData
                 );
 

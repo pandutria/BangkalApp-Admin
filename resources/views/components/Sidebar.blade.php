@@ -67,6 +67,23 @@
             </a>
         </li>        
 
+        <hr class="sidebar-divider">
+
+        <div class="sidebar-heading">
+            Penduduk
+        </div>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/letter-types">
+                <i class="fas fa-envelope-square"></i>
+                <span>Kategori Surat</span>
+            </a>
+            <a class="nav-link" href="/letters">
+                <i class="fas fa-envelope-open-text"></i>
+                <span>Surat</span>
+            </a>
+        </li>        
+
         <hr class="sidebar-divider d-none d-md-block">
 
         <div class="text-center d-none d-md-inline">

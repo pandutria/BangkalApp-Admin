@@ -45,3 +45,7 @@ Route::get('/organization', function() {
 Route::get('/village', function() {
     return view('pages.village');
 });
+
+Route::get('/letter-types', function() {
+    return view('pages.letter-types');
+});
