@@ -8,6 +8,7 @@ use App\Models\LetterType;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
+
 class LetterRequestController extends Controller
 {
     public function index(Request $request) {
@@ -37,6 +38,17 @@ class LetterRequestController extends Controller
             ->get();
 
          return response()->json($letterRequests);
+    }
+
+
+    public function showLetterByUser() {
+        $user = Auth::user();
+
+        $letterRequest = LetterRequest::with(['user', 'letter_type'])
+            ->where('user_id', $user->id)
+            ->get();
+
+        return response()->json($letterRequest);
     }
 
     public function store(Request $request) {
