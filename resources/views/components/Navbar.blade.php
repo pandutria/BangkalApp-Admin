@@ -73,6 +73,7 @@
 
     </nav>
 </body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const data = localStorage.getItem('data');
         const dataParse = JSON.parse(data);
@@ -105,5 +106,21 @@
 
             handleLogout();
         });
+
+        async function getMe() {
+            const response = await axios.get('/api/me', {
+                headers: {
+                    Authorization: `Bearer ${dataParse.token}`
+                }
+            });
+
+            const role = response.data.role;
+            if (role != 'admin') {
+                localStorage.removeItem('data');
+                window.location.href = '/';
+            }
+        }
+
+        getMe();
     </script>
 </html>

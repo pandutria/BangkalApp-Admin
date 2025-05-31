@@ -98,7 +98,7 @@
                             data-text="${data.description}"
                             data-image="${data.image_url}"
                             data-level="${data.level}"
-                            data-target="#modalEditBerita">
+                            data-target="#modalEditOrganisasi">
                             Edit
                         </button>
                         <button class="btn btn-sm btn-danger mx-1" data-id="${data.id}">Hapus</button>

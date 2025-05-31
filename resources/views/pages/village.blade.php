@@ -98,7 +98,7 @@
                             data-image="${data.image_url}"
                             data-organization="${data.organization.id}"
                             data-contact="${data.contact}"
-                            data-target="#modalEditBerita">
+                            data-target="#modalEditPengguna">
                             Edit
                         </button>
                         <button class="btn btn-sm btn-danger mx-1" data-id="${data.id}">Hapus</button>

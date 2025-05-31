@@ -49,3 +49,7 @@ Route::get('/village', function() {
 Route::get('/letter-types', function() {
     return view('pages.letter-types');
 });
+
+Route::get('/letters', function() {
+    return view('pages.letter');
+});

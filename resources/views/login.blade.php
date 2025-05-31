@@ -85,6 +85,26 @@
                         password: inputPassword
                     });
 
+                    const role = response.data.user.role;
+                    if (role != "admin") {
+                        const token = response.data.token;
+                        await axios.post('/api/logout', {}, {
+                            headers: {
+                                Authorization: `Bearer ${token}`
+                            }
+                        });
+
+                        Swal.fire({
+                            title: 'Anda Bukan Admin!',
+                            icon: 'error'
+                        });
+
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000);
+                        return
+                    }
+
                     const dataUser = {
                         token: response.data.token,
                         name:response.data.user.fullname

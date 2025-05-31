@@ -17,8 +17,7 @@
 </head>
 
 <body>
-    @include('pages.add.addPotential')
-    @include('pages.edit.editPotential')
+    @include('pages.edit.editLetter')
     <div class="" id="wrapper">
         @include('components.sidebar')
         <div id="content-wrapper" class="d-flex flex-column">
@@ -26,10 +25,7 @@
                 @include('components.navbar')
                 <div class="container-fluid">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h1 class="h3 text-gray-800 mb-0">Potensi</h1>
-                        <button class="btn text-white bg-success" data-toggle="modal" data-target="#modalTambahPotensi">
-                            Tambah
-                        </button>
+                        <h1 class="h3 text-gray-800 mb-0">Surat</h1>
                     </div>
                     <div class="card shadow mb-4 mt-4">
                         <div class="card-body">
@@ -38,12 +34,16 @@
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
-                                            <th>Deskripsi</th>
-                                            <th>Gambar</th>
+                                            <th>Kategori Surat</th>
+                                            <th>NIK</th>
+                                            <th>Alamat</th>
+                                            <th>Gender</th>
+                                            <th>Tempat Lahir</th>
+                                            <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="potentialBody">
+                                    <tbody id="letterBody">
                                         <!-- <tr>  -->
                                     </tbody>
                                 </table>
@@ -71,32 +71,52 @@
     let table;
     const deleteBtn = document.getElementById('deleteBtn');
 
-    async function getPotential() {
-        const response = await axios.get('/api/potential');
+    async function getLetter() {
+        const response = await axios.get('/api/letterRequest');
 
         if ($.fn.DataTable.isDataTable('#dataTable')) {
             $('#dataTable').DataTable().clear().destroy();
         }
 
-        const tbody = document.getElementById('potentialBody');
+        const tbody = document.getElementById('letterBody');
         const dataTableBody = [];
 
         response.data.forEach(data => {
             const row = `
                 <tr>
-                    <td>${data.title}</td>
-                    <td>${data.description}</td>
-                    <td>
-                        <img src="${data.image_url}" class="img-thumbnail" style="width: 150px;" />
+                    <td>${data.user.fullname}</td>
+                    <td>${data.letter_type.name}</td>
+                    <td>${data.nik}</td>
+                    <td>${data.address}</td>
+                    <td>${data.gender}</td>
+                    <td>${data.place_of_birth}</td>
+                    <td class="h5">
+                      ${
+                        data.status === 'pending'
+                          ? '<span class="badge border border-warning text-warning">Menunggu</span>'
+                          : data.status === 'approved'
+                          ? '<span class="badge border border-success text-success">Diterima</span>'
+                          : data.status === 'rejected'
+                          ? '<span class="badge border border-danger text-danger">Ditolak</span>'
+                          : ''
+                      }
                     </td>
                     <td class=" d-flex">
-                        <button class="btn btn-sm btn-primary me-1 editBtn mx-1"
+                        <button class="btn btn-sm btn-success me-1 editBtn mx-1"
                             data-id="${data.id}"
-                            data-title="${data.title}"
-                            data-text="${data.description}"
-                            data-image="${data.image_url}"
-                            data-target="#modalEditPotensi">
-                            Edit
+                            data-user="${data.user.fullname}"
+                            data-tipe="${data.letter_type.name}"
+                            data-nik="${data.nik}"
+                            data-address="${data.address}"
+                            data-gender="${data.gender}"
+                            data-place_of_birth="${data.place_of_birth}"
+                            data-status="${data.status}"
+                            data-citizenship="${data.citizenship}"
+                            data-religion="${data.religion}"
+                            data-father_name="${data.father_name}"
+                            data-mother_name="${data.mother_name}"
+                            data-target="#modalEditLetter">
+                            Lihat
                         </button>
                         <button class="btn btn-sm btn-danger mx-1" data-id="${data.id}">Hapus</button>
                     </td>
@@ -134,12 +154,12 @@
         });
     }
 
-    document.getElementById('potentialBody').addEventListener('click', async function(e) {
+    document.getElementById('letterBody').addEventListener('click', async function(e) {
         if (e.target && e.target.classList.contains('btn-danger')) {
             const id = e.target.getAttribute('data-id');
 
             const confirmDelete = await Swal.fire({
-                title: 'Yakin ingin menghapus potensi ini?',
+                title: 'Yakin ingin menghapus Surat ini?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Ya, hapus!',
@@ -148,11 +168,11 @@
 
             if (confirmDelete.isConfirmed) {
                 try {
-                    await axios.delete(`/api/potential/${id}`);
-                    Swal.fire('Terhapus!', 'Potensi berhasil dihapus.', 'success');
-                    getPotential();
+                    await axios.delete(`/api/letterRequest/${id}`);
+                    Swal.fire('Terhapus!', 'Surat berhasil dihapus.', 'success');
+                    getLetter();
                 } catch (error) {
-                    Swal.fire('Gagal!', 'Potensi gagal dihapus.', 'error');
+                    Swal.fire('Gagal!', 'Surat gagal dihapus.', 'error');
                     console.error(error);
                 }
             }
@@ -171,18 +191,33 @@
         if (e.target && e.target.classList.contains('editBtn')) {
             const button = e.target;
             const id = button.getAttribute('data-id');
-            const title = button.getAttribute('data-title');
-            const text = button.getAttribute('data-text');
-            const url = button.getAttribute('data-url');
+            const user = button.getAttribute('data-user');
+            const tipe = button.getAttribute('data-tipe');
+            const nik = button.getAttribute('data-nik');
+            const address = button.getAttribute('data-address');
+            const gender = button.getAttribute('data-gender');
+            const place_of_birth = button.getAttribute('data-place_of_birth');
+            const citizenship = button.getAttribute('data-citizenship');
+            const religion = button.getAttribute('data-religion');
+            const father_name = button.getAttribute('data-father_name');
+            const mother_name = button.getAttribute('data-mother_name');
 
-            document.getElementById('namaEdit').value = title;
-            document.getElementById('deskripsiEdit').value = text;
+            document.getElementById('namaEdit').value = user;
+            document.getElementById('tipeEdit').value = tipe;
+            document.getElementById('nikEdit').value = nik;
+            document.getElementById('alamatEdit').value = address;
+            document.getElementById('genderEdit').value = gender;
+            document.getElementById('tempatLahirEdit').value = place_of_birth;
+            document.getElementById('wargaEdit').value = citizenship;
+            document.getElementById('agamaEdit').value = religion;
+            document.getElementById('ayahEdit').value = father_name;
+            document.getElementById('ibuEdit').value = mother_name;
             document.getElementById('editId').value = id;
-            $('#modalEditPotensi').modal('show');
+            $('#modalEditSurat').modal('show');
         }
     });
 
-    getPotential();
+    getLetter();
 </script>
 
 </html>

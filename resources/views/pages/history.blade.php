@@ -97,7 +97,7 @@
                             data-text="${data.text}"
                             data-image="${data.image_url}"
                             data-date="${data.date}"
-                            data-target="#modalEditBerita">
+                            data-target="#modalEditSejarah">
                             Edit
                         </button>
                         <button class="btn btn-sm btn-danger mx-1" data-id="${data.id}">Hapus</button>
