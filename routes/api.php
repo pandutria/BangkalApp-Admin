@@ -31,6 +31,7 @@ Route::middleware('authuser')->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);
 
     Route::post('/letterRequest', [LetterRequestController::class, 'store']);
+    Route::get('/letterRequest/byUser', [LetterRequestController::class, 'showLetterByUser']);
 });
 
 Route::get('/news', [NewsController::class, 'index']);
