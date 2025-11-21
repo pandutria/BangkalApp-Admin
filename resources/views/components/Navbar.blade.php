@@ -108,16 +108,20 @@
         });
 
         async function getMe() {
-            const response = await axios.get('/api/me', {
-                headers: {
-                    Authorization: `Bearer ${dataParse.token}`
+            try {
+                const response = await axios.get('/api/me', {
+                    headers: {
+                        Authorization: `Bearer ${dataParse.token}`
+                    }
+                });
+                
+                const role = response.data.user.role;
+                if (role != 'admin') {
+                    localStorage.removeItem('data');
+                    window.location.href = '/';
                 }
-            });
-
-            const role = response.data.role;
-            if (role != 'admin') {
-                localStorage.removeItem('data');
-                window.location.href = '/';
+            } catch (error) {
+                window.location.href = "/";
             }
         }
 

@@ -11,6 +11,8 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\VillageOfficialsController;
 use App\Http\Controllers\LetterTypeController;
 use App\Http\Controllers\LetterRequestController;
+use App\Http\Middleware\AuthMiddleware;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,7 +26,7 @@ use App\Http\Controllers\LetterRequestController;
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('authuser')->group(function () {
     Route::get('/me', [UserController::class, 'me']);
     Route::post('/logout', [UserController::class, 'logout']);
 

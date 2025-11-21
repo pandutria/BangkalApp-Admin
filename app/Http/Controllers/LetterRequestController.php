@@ -7,6 +7,8 @@ use App\Models\LetterRequest;
 use App\Models\LetterType;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class LetterRequestController extends Controller
 {
@@ -47,6 +49,14 @@ class LetterRequestController extends Controller
             $letterRequest->user_id = $user->id;
             $letterRequest->letter_type_id = $request->letter_type_id;
             $letterRequest->nik = $request->nik;
+            $letterRequest->ktp = $request->ktp;
+            $letterRequest->no_kk = $request->no_kk;
+            $letterRequest->rt = $request->rt;
+            $letterRequest->rw = $request->rw;
+            $letterRequest->city = $request->city;
+            $letterRequest->work = $request->work;
+            $letterRequest->purpose = $request->purpose;
+            $letterRequest->marriage = $request->marriage;
             $letterRequest->address = $request->address;
             $letterRequest->gender = $request->gender;
             $letterRequest->place_of_birth = $request->place_of_birth;
@@ -70,10 +80,22 @@ class LetterRequestController extends Controller
         }
     }
 
-    public function approved($id) {
-        $letterRequest = LetterRequest::find($id);
+    public function approved(Request $request, $id) {
+        $validateData = Validator::make($request->all(), [
+            "file" => "required"
+        ]);
+
+        if ($validateData->fails()) {
+            return response()->json([
+                'message' => "File harus Diisi!",
+            ], 422);
+        }
+
+        $letterRequest = LetterRequest::where("uuid", $id)->first();
+        $path = Storage::disk("public")->put("letter", $request->file);
 
         $letterRequest->status = 'approved';
+        $letterRequest->file = $path;
         $letterRequest->save();
         $letterRequest->load(['user', 'letter_type']);
 

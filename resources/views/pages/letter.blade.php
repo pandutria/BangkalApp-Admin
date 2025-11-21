@@ -7,12 +7,16 @@
     <title>Bangkal App</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
     <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/assets/css/sb-admin-2.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link href="/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
@@ -36,7 +40,6 @@
                                             <th>Nama</th>
                                             <th>Kategori Surat</th>
                                             <th>NIK</th>
-                                            <th>Alamat</th>
                                             <th>Gender</th>
                                             <th>Tempat Lahir</th>
                                             <th>Status</th>
@@ -82,46 +85,49 @@
         const dataTableBody = [];
 
         response.data.forEach(data => {
-            const row = `
+             const row = `
                 <tr>
-                    <td>${data.user.fullname}</td>
-                    <td>${data.letter_type.name}</td>
-                    <td>${data.nik}</td>
-                    <td>${data.address}</td>
-                    <td>${data.gender}</td>
-                    <td>${data.place_of_birth}</td>
-                    <td class="h5">
-                      ${
-                        data.status === 'pending'
-                          ? '<span class="badge border border-warning text-warning">Menunggu</span>'
-                          : data.status === 'approved'
-                          ? '<span class="badge border border-success text-success">Diterima</span>'
-                          : data.status === 'rejected'
-                          ? '<span class="badge border border-danger text-danger">Ditolak</span>'
-                          : ''
-                      }
-                    </td>
-                    <td class=" d-flex">
-                        <button class="btn btn-sm btn-success me-1 editBtn mx-1"
-                            data-id="${data.id}"
-                            data-user="${data.user.fullname}"
-                            data-tipe="${data.letter_type.name}"
-                            data-nik="${data.nik}"
-                            data-address="${data.address}"
-                            data-gender="${data.gender}"
-                            data-place_of_birth="${data.place_of_birth}"
-                            data-status="${data.status}"
-                            data-citizenship="${data.citizenship}"
-                            data-religion="${data.religion}"
-                            data-father_name="${data.father_name}"
-                            data-mother_name="${data.mother_name}"
-                            data-target="#modalEditLetter">
-                            Lihat
-                        </button>
-                        <button class="btn btn-sm btn-danger mx-1" data-id="${data.id}">Hapus</button>
-                    </td>
+                <td>${data.user.fullname}</td>
+                <td>${data.letter_type.name}</td>
+                <td>${data.nik}</td>
+                <td>${data.gender}</td>
+                <td>${data.place_of_birth}</td>
+                <td class="h5">${data.status === 'pending'
+                                    ? '<span class="badge border border-warning text-warning">Menunggu</span>'
+                                    : data.status === 'approved'
+                                        ? '<span class="badge border border-success text-success">Diterima</span>'
+                                        : data.status === 'rejected'
+                                            ? '<span class="badge border border-danger text-danger">Ditolak</span>'
+                                            : ''
+                                }</td>
+                <td class="d-flex">
+                <button class="btn btn-sm btn-success me-1 editBtn mx-1"
+                    data-id="${data.uuid}"
+                    data-user="${data.user.fullname}"
+                    data-tipe="${data.letter_type.name}"
+                    data-nik="${data.nik}"
+                    data-rt="${data.rt}"
+                    data-rw="${data.rw}"
+                    data-ktp="${data.ktp}"
+                    data-kk="${data.no_kk}"
+                    data-address="${data.address}"
+                    data-gender="${data.gender}"
+                    data-place="${data.place_of_birth}"
+                    data-marriage="${data.marriage}"
+                    data-city="${data.city}"
+                    data-work="${data.work}"
+                    data-purpose="${data.purpose}"
+                    data-citizenship="${data.citizenship}"
+                    data-religion="${data.religion}"
+                    data-father="${data.father_name}"
+                    data-mother="${data.mother_name}"
+                    data-file="${data.file}">
+                    Lihat
+                </button>
+                <button class="btn btn-sm btn-danger mx-1" data-id="${data.uuid}">Hapus</button>
+                </td>
                 </tr>
-            `;
+                `;
             dataTableBody.push(row);
         });
 
@@ -188,31 +194,38 @@
     }
 
     document.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('editBtn')) {
-            const button = e.target;
-            const id = button.getAttribute('data-id');
-            const user = button.getAttribute('data-user');
-            const tipe = button.getAttribute('data-tipe');
-            const nik = button.getAttribute('data-nik');
-            const address = button.getAttribute('data-address');
-            const gender = button.getAttribute('data-gender');
-            const place_of_birth = button.getAttribute('data-place_of_birth');
-            const citizenship = button.getAttribute('data-citizenship');
-            const religion = button.getAttribute('data-religion');
-            const father_name = button.getAttribute('data-father_name');
-            const mother_name = button.getAttribute('data-mother_name');
+    if (e.target && e.target.classList.contains('editBtn')) {
+            const b = e.target;
+        
+            document.getElementById('editId').value = b.dataset.id;
+            document.getElementById('namaEdit').value = b.dataset.user;
+            document.getElementById('tipeEdit').value = b.dataset.tipe;
+            document.getElementById('nikEdit').value = b.dataset.nik;
+            document.getElementById('rtEdit').value = b.dataset.rt;
+            document.getElementById('rwEdit').value = b.dataset.rw;
+            document.getElementById('ktpEdit').value = b.dataset.ktp;
+            document.getElementById('kkEdit').value = b.dataset.kk;
+            document.getElementById('alamatEdit').value = b.dataset.address;
+            document.getElementById('genderEdit').value = b.dataset.gender;
+            document.getElementById('tempatLahirEdit').value = b.dataset.place;
+            document.getElementById('menikahEdit').value = b.dataset.marriage;
+            document.getElementById('kotaEdit').value = b.dataset.city;
+            document.getElementById('kerjaEdit').value = b.dataset.work;
+            document.getElementById('keperluanEdit').value = b.dataset.purpose;
+            document.getElementById('wargaEdit').value = b.dataset.citizenship;
+            document.getElementById('agamaEdit').value = b.dataset.religion;
+            document.getElementById('ayahEdit').value = b.dataset.father;
+            document.getElementById('ibuEdit').value = b.dataset.mother;
+            const pdfUrl = b.dataset.file;
 
-            document.getElementById('namaEdit').value = user;
-            document.getElementById('tipeEdit').value = tipe;
-            document.getElementById('nikEdit').value = nik;
-            document.getElementById('alamatEdit').value = address;
-            document.getElementById('genderEdit').value = gender;
-            document.getElementById('tempatLahirEdit').value = place_of_birth;
-            document.getElementById('wargaEdit').value = citizenship;
-            document.getElementById('agamaEdit').value = religion;
-            document.getElementById('ayahEdit').value = father_name;
-            document.getElementById('ibuEdit').value = mother_name;
-            document.getElementById('editId').value = id;
+            if (pdfUrl && pdfUrl !== "null" && pdfUrl !== "") {
+                document.getElementById("pdfWrapper").style.display = "block";
+                document.getElementById("pdfPreview").src = "/storage/" + pdfUrl;
+            } else {
+                document.getElementById("pdfWrapper").style.display = "none";
+                document.getElementById("pdfPreview").src = "";
+            }
+        
             $('#modalEditSurat').modal('show');
         }
     });

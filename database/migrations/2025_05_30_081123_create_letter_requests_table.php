@@ -12,18 +12,27 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('letter_requests', function (Blueprint $table) {
-            $table->id();
+            $table->uuid()->primary();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('letter_type_id')->constrained('letter_types')->onDelete('cascade');
+            $table->string('rt');
+            $table->string('rw');
             $table->string('nik');
+            $table->string('ktp');
             $table->string('address');
             $table->string('gender');
+            $table->string('marriage');
+            $table->string('city');
+            $table->string('work');
+            $table->string('no_kk');
             $table->string('place_of_birth');
             $table->string('citizenship');
             $table->string('religion');
             $table->string('father_name');
             $table->string('mother_name');
             $table->string('status');
+            $table->string('file')->nullable();
+            $table->string('purpose');
             $table->timestamps();
         });
     }
